@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./HobbyList.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteHobby, setActiveHobby } from "../../../actions/hobby";
+import { removeHobby, setActiveId } from "components/Home/HobbyList/hobbySlice";
 
 HobbyList.propTypes = {
   hobbyList: PropTypes.array,
@@ -12,22 +12,21 @@ HobbyList.propTypes = {
 
 HobbyList.defaultProps = {
   hobbyList: [],
-  active: null,
+  activeId: null,
   onHobbyClick: null,
 };
 
-function HobbyList(props) {
+function HobbyList() {
   const hobbyList = useSelector((state) => state.hobby.list);
   const activeId = useSelector((state) => state.hobby.activeId);
   const dispatch = useDispatch();
 
-  const handleDelete = (id) => {
-    console.log(id);
-    dispatch(deleteHobby(id));
+  const handleDelete = (hobby) => {
+    dispatch(removeHobby(hobby));
   };
 
   const handleClick = (id) => {
-    dispatch(setActiveHobby(id));
+    dispatch(setActiveId(id));
   };
 
   return (
@@ -39,7 +38,7 @@ function HobbyList(props) {
           onClick={() => handleClick(hobby.id)}
         >
           {hobby.title}
-          <button onClick={() => handleDelete(hobby.id)}>Delete</button>
+          <button onClick={() => handleDelete(hobby)}>Delete</button>
         </li>
       ))}
     </ul>

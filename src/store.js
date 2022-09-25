@@ -1,5 +1,10 @@
-import { createStore } from "redux";
-import rootReducer from "./reducers";
+import { configureStore } from "@reduxjs/toolkit";
+import hobbySlice from "components/Home/HobbyList/hobbySlice";
 
-const store = createStore(rootReducer);
+const store = configureStore({
+  reducer: {
+    hobby: hobbySlice,
+  },
+});
+
 export default store;

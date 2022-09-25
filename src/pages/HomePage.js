@@ -1,20 +1,22 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addNewHobby } from "../actions/hobby";
-import HobbyList from "../components/Home/HobbyList";
+import HobbyList from "components/Home/HobbyList";
+import { addHobby } from "components/Home/HobbyList/hobbySlice";
 
-const randomId = () => Math.floor(Math.random() * 100000);
+const ID = () => {
+  return "_" + Math.random().toString(36).substr(2, 9);
+};
 
 function HomePage() {
   const dispatch = useDispatch();
 
   const handleAdd = () => {
-    const userId = randomId();
+    const userId = ID();
     const action = {
       id: userId,
       title: `Hobby ${userId}`,
     };
-    dispatch(addNewHobby(action));
+    dispatch(addHobby(action));
   };
 
   return (
